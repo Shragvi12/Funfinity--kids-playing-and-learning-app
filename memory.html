@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Game - Funfinity</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #ffecd2, #fcb69f);
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+     .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      background-color: #FFD93D;
+      color: #333;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #FFC107;
+    }
+
+
+
+    h1 {
+      text-align: center;
+      color: #4a148c;
+      margin-top: 20px;
+      font-size: 2.5rem;
+      animation: bounce 1s ease infinite alternate;
+    }
+
+    @keyframes bounce {
+      to { transform: translateY(-8px); }
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      grid-gap: 15px;
+      margin: 30px auto;
+      justify-content: center;
+    }
+
+    .card {
+      width: 80px;
+      height: 80px;
+      background-color: #fff3cd;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.4s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card .front, .card .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card .front {
+      background-color: #fff3cd;
+    }
+
+    .card .back {
+      background-color: #ffb74d;
+      transform: rotateY(180deg);
+    }
+
+    .reset-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #4db6ac;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+
+    .reset-btn:hover {
+      background-color: #00897b;
+    }
+  </style>
+</head>
+<body>
+  <a class="back-button" href="dashboard.html">← Back</a>
+
+  <h1>🧠 Memory Match Game!</h1>
+  <div class="game-board" id="gameBoard"></div>
+  <button class="reset-btn" onclick="startGame()">🔄 Restart</button>
+
+  <script>
+    const emojis = ['🐶','🐱','🦊','🐼','🐸','🐷','🦁','🐵'];
+    let firstCard, secondCard;
+    let lockBoard = false;
+
+    function shuffle(array) {
+      return array.sort(() => 0.5 - Math.random());
+    }
+
+    function startGame() {
+      const gameBoard = document.getElementById('gameBoard');
+      gameBoard.innerHTML = '';
+      const cards = shuffle([...emojis, ...emojis]);
+
+      cards.forEach((emoji, index) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+          <div class="front">❓</div>
+          <div class="back">${emoji}</div>
+        `;
+        card.addEventListener('click', flipCard);
+        gameBoard.appendChild(card);
+      });
+
+      firstCard = null;
+      secondCard = null;
+      lockBoard = false;
+    }
+
+    function flipCard() {
+      if (lockBoard || this.classList.contains('flipped')) return;
+
+      this.classList.add('flipped');
+
+      if (!firstCard) {
+        firstCard = this;
+        return;
+      }
+
+      secondCard = this;
+      checkMatch();
+    }
+
+    function checkMatch() {
+      const isMatch = firstCard.querySelector('.back').textContent === secondCard.querySelector('.back').textContent;
+
+      if (isMatch) {
+        disableCards();
+      } else {
+        unflipCards();
+      }
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+      }, 1000);
+    }
+
+    function resetBoard() {
+      [firstCard, secondCard, lockBoard] = [null, null, false];
+    }
+
+    // Initialize on load
+    startGame();
+  </script>
+</body>
+</html>

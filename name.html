@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enter Your Name - Funfinity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+  <div class="box">
+    <h1>Let's Get Started!</h1>
+    <p>Enter your name to continue</p>
+    <input type="text" id="username" placeholder="Your name..." required />
+    <br />
+    <button onclick="saveName()">Continue</button>
+  </div>
+</div>
+
+<script>
+  function saveName() {
+    const name = document.getElementById("username").value.trim();
+    if (name === "") {
+      alert("Please enter your name!");
+    } else {
+      localStorage.setItem("funfinityUser", name);
+      window.location.href = "dashboard.html"; // redirect to dashboard
+    }
+  }
+</script>
+
+  
+</body>
+</html>
+
+
+
+

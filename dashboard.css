@@ -1,0 +1,204 @@
+body {
+  margin: 0;
+  font-family: 'Baloo 2', cursive;
+  background-color: #f9f9f9;
+}
+
+/* 🔧 Navbar styling */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ /* reduced from 40px to 20px */
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎨 Logo */
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #ff7f50;
+  margin-right: auto;
+}
+
+/* 🔗 Navbar links */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  font-size: 18px;
+  padding: 12px 40px;
+  /* Removed padding-left */
+}
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ff7f50;
+}
+
+/* 🖼️ Hero section */
+.hero-section {
+  height: 100vh;
+  background-image: url('dashboard.png'); /* Replace with your actual file path */
+  background-size: cover;
+  background-position: center;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Push content higher */
+  align-items: center;
+  text-align: center;
+  padding-top: 180px; /* Moves the text up */
+  position: relative;
+}
+
+.welcome-heading {
+  font-size: 48px;
+
+  margin-bottom: 10px;
+  color: #f35613;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInSmooth 1s ease-out forwards;
+}
+
+/* Animation keyframes */
+@keyframes fadeInSmooth {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.hero-caption {
+  font-size: 22px;
+  max-width: 600px;
+  margin-top: 10px;
+  color: #c74d20;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: captionFadeIn 1s ease-in-out forwards;
+  animation-delay: 1s; /* Slight delay after heading */
+}
+
+/* Keyframes for smooth fade and slide-up */
+@keyframes captionFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.games-section {
+  background: #2A4B3F ;
+  padding: 60px 20px;
+  color: #fff;
+}
+
+.game-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin: 60px 0;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-in-out both;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
+}
+
+.game-block:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.game-block.reverse {
+  flex-direction: row-reverse;
+}
+
+.game-image img {
+  width: 280px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.game-image img:hover {
+  transform: scale(1.08) rotate(-1deg);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+}
+
+.game-info {
+  max-width: 500px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.game-info h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: #fcd34d;
+}
+
+.game-info p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+}
+
+.play-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #fcd34d, #fbbf24);
+  border-radius: 14px;
+  color: #2d2d2d;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 6px 12px rgba(255, 221, 51, 0.4);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(to right, #fde68a, #facc15);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+footer {
+  background:#8bbcb6;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 40px;
+   margin-top: 0;
+  padding-top: 10;
+}
